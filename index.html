@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Management System</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f2f2f2;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+            border-radius: 5px;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+        }
+        table {
+            width: 100%;
+            margin-top: 15px;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Student Management System</h1>
+
+<div class="container">
+    <input type="text" id="roll" placeholder="Roll Number">
+    <input type="text" id="name" placeholder="Student Name">
+    <input type="text" id="course" placeholder="Course">
+    <button onclick="addStudent()">Add Student</button>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Roll No</th>
+                <th>Name</th>
+                <th>Course</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+    </table>
+</div>
+
+<script>
+    function addStudent() {
+        let roll = document.getElementById("roll").value;
+        let name = document.getElementById("name").value;
+        let course = document.getElementById("course").value;
+
+        if (roll === "" || name === "" || course === "") {
+            alert("Please fill all fields");
+            return;
+        }
+
+        let table = document.getElementById("tableBody");
+        let row = table.insertRow();
+
+        row.insertCell(0).innerHTML = roll;
+        row.insertCell(1).innerHTML = name;
+        row.insertCell(2).innerHTML = course;
+        row.insertCell(3).innerHTML =
+            "<button onclick='deleteRow(this)'>Delete</button>";
+
+        document.getElementById("roll").value = "";
+        document.getElementById("name").value = "";
+        document.getElementById("course").value = "";
+    }
+
+    function deleteRow(btn) {
+        let row = btn.parentNode.parentNode;
+        row.parentNode.removeChild(row);
+    }
+</script>
+
+</body>
+</html>
